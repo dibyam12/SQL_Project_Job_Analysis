@@ -17,6 +17,7 @@ company_dim: Contains company details like company_id and name.
 
 # SQL Queries
 Below are the SQL queries used in this analysis, along with their purposes.
+
 **1. Top Demand Skills (top_demand_skill.sql)**
 This query retrieves the top 10 most in-demand skills based on the count of job postings mentioning each skill.
 
