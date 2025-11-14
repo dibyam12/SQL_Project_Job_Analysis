@@ -1,0 +1,270 @@
+
+WITH top_paying_jobs AS (
+    SELECT job_id,name AS company_name, job_title, salary_year_avg, job_posted_date
+    FROM job_postings_fact 
+    LEFT JOIN company_dim ON job_postings_fact.company_id = company_dim.company_id
+    WHERE job_title = 'Data Analyst' 
+    AND job_location = 'Anywhere'
+    AND salary_year_avg IS NOT NULL
+    ORDER BY salary_year_avg DESC
+)
+
+SELECT top_paying_jobs.*, skills_dim.skills AS skill_name
+ FROM top_paying_jobs
+ INNER JOIN skills_job_dim
+ ON top_paying_jobs.job_id = skills_job_dim.job_id
+ INNER JOIN skills_dim
+ ON skills_job_dim.skill_id = skills_dim.skill_id
+ORDER BY top_paying_jobs.salary_year_avg DESC
+LIMIT 30;
+
+
+-- SELECT skills_dim.skills
+--     FROM skills_job_dim 
+--     LEFT JOIN skills_dim 
+--     ON skills_job_dim.skill_id = skills_dim.skill_id
+--     LIMIT 10
+
+
+-- [
+--   {
+--     "job_id": 712473,
+--     "company_name": "Get It Recruit - Information Technology",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "165000.0",
+--     "job_posted_date": "2023-08-14 16:01:19",
+--     "skill_name": "sql"
+--   },
+--   {
+--     "job_id": 712473,
+--     "company_name": "Get It Recruit - Information Technology",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "165000.0",
+--     "job_posted_date": "2023-08-14 16:01:19",
+--     "skill_name": "python"
+--   },
+--   {
+--     "job_id": 712473,
+--     "company_name": "Get It Recruit - Information Technology",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "165000.0",
+--     "job_posted_date": "2023-08-14 16:01:19",
+--     "skill_name": "r"
+--   },
+--   {
+--     "job_id": 712473,
+--     "company_name": "Get It Recruit - Information Technology",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "165000.0",
+--     "job_posted_date": "2023-08-14 16:01:19",
+--     "skill_name": "sas"
+--   },
+--   {
+--     "job_id": 712473,
+--     "company_name": "Get It Recruit - Information Technology",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "165000.0",
+--     "job_posted_date": "2023-08-14 16:01:19",
+--     "skill_name": "matlab"
+--   },
+--   {
+--     "job_id": 712473,
+--     "company_name": "Get It Recruit - Information Technology",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "165000.0",
+--     "job_posted_date": "2023-08-14 16:01:19",
+--     "skill_name": "pandas"
+--   },
+--   {
+--     "job_id": 712473,
+--     "company_name": "Get It Recruit - Information Technology",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "165000.0",
+--     "job_posted_date": "2023-08-14 16:01:19",
+--     "skill_name": "tableau"
+--   },
+--   {
+--     "job_id": 712473,
+--     "company_name": "Get It Recruit - Information Technology",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "165000.0",
+--     "job_posted_date": "2023-08-14 16:01:19",
+--     "skill_name": "looker"
+--   },
+--   {
+--     "job_id": 712473,
+--     "company_name": "Get It Recruit - Information Technology",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "165000.0",
+--     "job_posted_date": "2023-08-14 16:01:19",
+--     "skill_name": "sas"
+--   },
+--   {
+--     "job_id": 1246069,
+--     "company_name": "Plexus Resource Solutions",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "165000.0",
+--     "job_posted_date": "2023-12-08 09:16:37",
+--     "skill_name": "python"
+--   },
+--   {
+--     "job_id": 1246069,
+--     "company_name": "Plexus Resource Solutions",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "165000.0",
+--     "job_posted_date": "2023-12-08 09:16:37",
+--     "skill_name": "mysql"
+--   },
+--   {
+--     "job_id": 1246069,
+--     "company_name": "Plexus Resource Solutions",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "165000.0",
+--     "job_posted_date": "2023-12-08 09:16:37",
+--     "skill_name": "aws"
+--   },
+--   {
+--     "job_id": 456042,
+--     "company_name": "Get It Recruit - Healthcare",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "151500.0",
+--     "job_posted_date": "2023-09-25 10:59:56",
+--     "skill_name": "sql"
+--   },
+--   {
+--     "job_id": 456042,
+--     "company_name": "Get It Recruit - Healthcare",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "151500.0",
+--     "job_posted_date": "2023-09-25 10:59:56",
+--     "skill_name": "python"
+--   },
+--   {
+--     "job_id": 456042,
+--     "company_name": "Get It Recruit - Healthcare",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "151500.0",
+--     "job_posted_date": "2023-09-25 10:59:56",
+--     "skill_name": "r"
+--   },
+--   {
+--     "job_id": 405581,
+--     "company_name": "CyberCoders",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-05-01 13:00:20",
+--     "skill_name": "python"
+--   },
+--   {
+--     "job_id": 405581,
+--     "company_name": "CyberCoders",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-05-01 13:00:20",
+--     "skill_name": "java"
+--   },
+--   {
+--     "job_id": 405581,
+--     "company_name": "CyberCoders",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-05-01 13:00:20",
+--     "skill_name": "r"
+--   },
+--   {
+--     "job_id": 405581,
+--     "company_name": "CyberCoders",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-05-01 13:00:20",
+--     "skill_name": "javascript"
+--   },
+--   {
+--     "job_id": 405581,
+--     "company_name": "CyberCoders",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-05-01 13:00:20",
+--     "skill_name": "c++"
+--   },
+--   {
+--     "job_id": 405581,
+--     "company_name": "CyberCoders",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-05-01 13:00:20",
+--     "skill_name": "tableau"
+--   },
+--   {
+--     "job_id": 405581,
+--     "company_name": "CyberCoders",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-05-01 13:00:20",
+--     "skill_name": "power bi"
+--   },
+--   {
+--     "job_id": 405581,
+--     "company_name": "CyberCoders",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-05-01 13:00:20",
+--     "skill_name": "qlik"
+--   },
+--   {
+--     "job_id": 479485,
+--     "company_name": "Level",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-03-15 16:59:55",
+--     "skill_name": "sql"
+--   },
+--   {
+--     "job_id": 479485,
+--     "company_name": "Level",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-03-15 16:59:55",
+--     "skill_name": "python"
+--   },
+--   {
+--     "job_id": 479485,
+--     "company_name": "Level",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-03-15 16:59:55",
+--     "skill_name": "r"
+--   },
+--   {
+--     "job_id": 479485,
+--     "company_name": "Level",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-03-15 16:59:55",
+--     "skill_name": "golang"
+--   },
+--   {
+--     "job_id": 479485,
+--     "company_name": "Level",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-03-15 16:59:55",
+--     "skill_name": "elasticsearch"
+--   },
+--   {
+--     "job_id": 479485,
+--     "company_name": "Level",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-03-15 16:59:55",
+--     "skill_name": "aws"
+--   },
+--   {
+--     "job_id": 479485,
+--     "company_name": "Level",
+--     "job_title": "Data Analyst",
+--     "salary_year_avg": "145000.0",
+--     "job_posted_date": "2023-03-15 16:59:55",
+--     "skill_name": "bigquery"
+--   }
+-- ]
